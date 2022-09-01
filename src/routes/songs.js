@@ -16,6 +16,16 @@ function songs(app) {
         return res.status(result.success ? 201 : 400).json(result.data);
     });
 
+    router.patch("/:idSong", async (req, res) => {
+        const result = await songService.edit(req.params.idSong, req.body);
+        return res.status(result.success ? 202 : 400).json(result.data);
+    });
+
+    router.put("/:idSong", async (req, res) => {
+        const result = await songService.update(req.params.idSong, req.body);
+        return res.status(result.success ? 202 : 400).json(result.data);
+    });
+
     router.delete("/:idSong", async (req, res) => {
         const result = await songService.delete(req.params.idSong);
         return res.status(result.success ? 202 : 400).json(result.data);
