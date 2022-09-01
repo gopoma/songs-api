@@ -16,7 +16,7 @@ const connection = mysql.createPool({
     dateStrings: true
 });
 
-function queryPromise(sql, data) {
+function query(sql, data) {
     return new Promise((resolve, reject) => {
         connection.query(sql, data, (error, result) => {
             if(error) {
@@ -27,22 +27,6 @@ function queryPromise(sql, data) {
     });
 }
 
-async function query(sql, data) {
-    try {
-        const result = await queryPromise(sql, data);
-        return {
-            success: true,
-            result
-        };
-    } catch(error) {
-        console.log(error);
-        return {
-            success: false,
-            message: error.message
-        };
-    }
-}
-
-module.exports = {
+module.exports = { 
     query
 };
