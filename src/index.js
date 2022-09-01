@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 connection.query("SELECT * FROM users", (error, result) => {
     if(error) {
         console.log("A wild Error has appeared!");
+        console.log(error);
     } else {
         console.log(result);
     }
