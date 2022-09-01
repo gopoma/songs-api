@@ -1,6 +1,6 @@
 const express = require("express");
 const { port } = require("./config");
-const { connection } = require("./libs/database.js");
+const { query } = require("./libs/database.js");
 
 const app = express();
 
@@ -17,11 +17,7 @@ app.get("/", (req, res) => {
     });
 });
 
-connection.query("SELECT * FROM users", (error, result) => {
-    if(error) {
-        console.log("A wild Error has appeared!");
-        console.log(error);
-    } else {
-        console.log(result);
-    }
+app.get("/api/users", async (req, res) => {
+    const { result:users } = await query("SELECT * FROM users");
+    return res.json(users);
 });
