@@ -6,6 +6,21 @@ class SongService {
         return songs;
     }
 
+    async get(id) {
+        try {
+            const song = await SongModel.getById(id);
+            return {
+                success: true,
+                data: song
+            };
+        } catch(error) {
+            return {
+                success: false,
+                data: { message: error.message }
+            };
+        }
+    }
+
     async add(data) {
         try {
             await SongModel.create(data);

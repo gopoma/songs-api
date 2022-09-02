@@ -11,6 +11,11 @@ function songs(app) {
         return res.json(result);
     });
 
+    router.get("/:idSong", async (req, res) => {
+        const result = await songService.get(req.params.idSong);
+        return res.status(result.success ? 200 : 404).json(result.data);
+    });
+
     router.post("/", async (req, res) => {
         const result = await songService.add(req.body);
         return res.status(result.success ? 201 : 400).json(result.data);

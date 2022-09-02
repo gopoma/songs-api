@@ -5,6 +5,15 @@ class SongModel {
         return await query("SELECT * FROM songs");
     }
 
+    static async getById(id) {
+        const result = await query("SELECT * FROM songs WHERE id=?", [id]);
+        if(result.length === 0) {
+            throw new Error("Not Found");
+        }
+        const song = result[0];
+        return song;
+    }
+
     static async create(data) {
         return await query("INSERT INTO songs(??) VALUES (?)", [Object.keys(data), Object.values(data)]);
     }
